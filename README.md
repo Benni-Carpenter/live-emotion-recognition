@@ -26,21 +26,23 @@ pip install -r requirements.txt
 
 ### Trainiertes Modell
 
-Das vortrainierte Modell (`trained_model_rafdb.pth`) ist zu groß für Git. Lade es separat herunter und lege es im Projektroot ab – oder trainiere selbst:
+Das vortrainierte Modell (`trained_model_rafdb.pth`) ist zu groß für Git. Lade es separat herunter und lege es in `models/` ab – oder trainiere selbst:
 
 ```bash
-python training.py
+python -m src.training
 ```
 
 Der Datensatz wird im Ordner `RafDB-Dataset/` mit den Unterordnern `train/` und `validation/` erwartet, jeweils mit Klassen-Unterordnern (ImageFolder-Format).
 
 ## Verwendung
 
+Alle Apps werden vom Projektroot aus gestartet:
+
 ### Live-Webcam
 
 ```bash
-python app_webcam.py              # Standard: alle 2 Sekunden
-python app_webcam.py -i 5         # Alle 5 Sekunden klassifizieren
+python -m apps.app_webcam              # Standard: alle 2 Sekunden
+python -m apps.app_webcam -i 5         # Alle 5 Sekunden klassifizieren
 ```
 
 Beenden mit **Q**.
@@ -48,15 +50,15 @@ Beenden mit **Q**.
 ### Video-Datei
 
 ```bash
-python app_video.py mein_video.mp4
-python app_video.py mein_video.mp4 -o ergebnis.mp4
+python -m apps.app_video mein_video.mp4
+python -m apps.app_video mein_video.mp4 -o ergebnis.mp4
 ```
 
 ### Ordner mit Bildern → CSV
 
 ```bash
-python app_folder.py ./bilder/
-python app_folder.py ./bilder/ -o ergebnis.csv
+python -m apps.app_folder ./bilder/
+python -m apps.app_folder ./bilder/ -o ergebnis.csv
 ```
 
 Erzeugt eine CSV-Datei mit Softmax-Scores pro Emotion für jedes erkannte Gesicht.
@@ -78,13 +80,13 @@ Das Modell basiert auf **ResNet-50** (ohne vortrainierte Weights), dessen letzte
 
 ## Training anpassen
 
-Die wichtigsten Hyperparameter lassen sich direkt in `training.py` beim Aufruf von `run_training()` ändern:
+Die wichtigsten Hyperparameter lassen sich in `src/training.py` beim Aufruf von `run_training()` ändern:
 
 ```python
 run_training(device, dataset, batch_size=32, learning_rate=0.001, num_epochs=20)
 ```
 
-Augmentationen (Flip, Crop, ColorJitter) sind in `dataset.py` definiert.
+Augmentationen (Flip, Crop, ColorJitter) sind in `src/dataset.py` definiert.
 
 ## Abhängigkeiten
 

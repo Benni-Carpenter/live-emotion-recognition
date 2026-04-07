@@ -16,7 +16,7 @@ def get_device():
 
 CLASS_NAMES = ['anger', 'disgust', 'fear', 'happiness', 'sadness', 'surprise']
 NUM_CLASSES = len(CLASS_NAMES)
-MODEL_PATH = "trained_model_rafdb.pth"
+MODEL_PATH = "models/trained_model_rafdb.pth"
 DATASET_DIR = "RafDB-Dataset"
 IMAGE_SIZE = 64
 

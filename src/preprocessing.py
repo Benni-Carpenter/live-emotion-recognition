@@ -6,7 +6,7 @@ import cv2
 import dlib
 import numpy as np
 
-from config import GABOR_KSIZE, GABOR_SIGMA, GABOR_THETA, GABOR_LAMBDA, GABOR_GAMMA, GABOR_PSI
+from src.config import GABOR_KSIZE, GABOR_SIGMA, GABOR_THETA, GABOR_LAMBDA, GABOR_GAMMA, GABOR_PSI
 
 
 _face_detector = dlib.get_frontal_face_detector()

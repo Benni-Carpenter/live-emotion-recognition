@@ -6,7 +6,7 @@ import torch
 from PIL import Image
 import torchvision.transforms as transforms
 
-from config import IMAGE_SIZE, CLASS_NAMES, MODEL_PATH, get_device
+from src.config import IMAGE_SIZE, CLASS_NAMES, MODEL_PATH, get_device
 
 
 _transform = transforms.Compose([

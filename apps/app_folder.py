@@ -14,9 +14,9 @@ import os
 import cv2
 import csv
 
-from config import get_device, CLASS_NAMES, MODEL_PATH
-from preprocessing import detect_faces
-from inference import load_model, classify_with_scores
+from src.config import get_device, CLASS_NAMES, MODEL_PATH
+from src.preprocessing import detect_faces
+from src.inference import load_model, classify_with_scores
 
 
 def main(folder_path, csv_file='test.csv'):

@@ -12,9 +12,9 @@ Beispiele:
 
 import cv2
 
-from config import get_device, CLASS_NAMES, MODEL_PATH
-from preprocessing import detect_faces
-from inference import load_model, classify_faces
+from src.config import get_device, CLASS_NAMES, MODEL_PATH
+from src.preprocessing import detect_faces
+from src.inference import load_model, classify_faces
 
 
 def process_video(video_path, output_path="output_video.mp4"):

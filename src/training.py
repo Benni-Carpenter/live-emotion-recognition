@@ -9,9 +9,9 @@ import torch.optim as optim
 from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 
-from config import get_device, DATASET_DIR
-from dataset import LoadDataset
-from model import EmotionResNet
+from src.config import get_device, DATASET_DIR
+from src.dataset import LoadDataset
+from src.model import EmotionResNet
 
 
 def train_epoch(model, device, train_loader, criterion, optimizer):

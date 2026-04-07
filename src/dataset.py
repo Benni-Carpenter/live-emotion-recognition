@@ -6,7 +6,7 @@ from torch.utils.data import Dataset
 from torchvision import transforms
 import torchvision.datasets as datasets
 
-from config import IMAGE_SIZE
+from src.config import IMAGE_SIZE
 
 
 class LoadDataset(Dataset):
