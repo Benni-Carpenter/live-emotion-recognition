@@ -1,0 +1,31 @@
+# Deprecated code
+Deprecated/
+
+# Dataset
+RafDB-Dataset/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.code-workspace
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Output files
+output_video.mp4
+test.csv

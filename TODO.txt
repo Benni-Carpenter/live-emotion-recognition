@@ -1,0 +1,4 @@
+TODO
+====
+
+- app_folder.py: Bei mehreren Gesichtern pro Bild entstehen mehrere Zeilen in der CSV — alle mit demselben filepath, aber unterschiedlichen Scores. Bilder ohne erkanntes Gesicht werden übersprungen mit einer Warnung.
