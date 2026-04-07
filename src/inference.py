@@ -1,5 +1,5 @@
 """
-Inferenz: Modell laden und Gesichter klassifizieren.
+Inference: load model and classify faces.
 """
 
 import torch
@@ -17,7 +17,7 @@ _transform = transforms.Compose([
 
 
 def load_model(model_path=MODEL_PATH, device=None):
-    """Lädt das trainierte Modell einmalig."""
+    """Loads the trained model."""
     if device is None:
         device = get_device()
     model = torch.load(model_path, map_location=device, weights_only=False)
@@ -27,7 +27,7 @@ def load_model(model_path=MODEL_PATH, device=None):
 
 
 def classify_faces(model, faces, class_names=CLASS_NAMES, device=None):
-    """Klassifiziert eine Liste von Gesichtsbildern (BGR numpy arrays)."""
+    """Classifies a list of face images (BGR numpy arrays)."""
     if device is None:
         device = get_device()
 
@@ -45,7 +45,7 @@ def classify_faces(model, faces, class_names=CLASS_NAMES, device=None):
 
 
 def classify_with_scores(model, img, class_names=CLASS_NAMES, device=None):
-    """Klassifiziert ein einzelnes Bild und gibt Scores pro Klasse zurück."""
+    """Classifies a single image and returns per-class scores."""
     if device is None:
         device = get_device()
 

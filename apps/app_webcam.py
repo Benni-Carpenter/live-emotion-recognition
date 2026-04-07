@@ -1,12 +1,12 @@
 """
-Live-Webcam Emotionserkennung.
+Live webcam emotion recognition.
 
-Aufruf:
+Usage:
     python app_webcam.py
     python app_webcam.py -i 3
 
-Optionen:
-    -i, --interval  Sekunden zwischen Klassifikationen (default: 2)
+Options:
+    -i, --interval  Seconds between classifications (default: 2)
 """
 
 import cv2
@@ -68,8 +68,8 @@ def main(interval=2):
 
 if __name__ == "__main__":
     import argparse
-    parser = argparse.ArgumentParser(description="Live-Webcam Emotionserkennung.")
+    parser = argparse.ArgumentParser(description="Live webcam emotion recognition.")
     parser.add_argument("-i", "--interval", type=float, default=2,
-                        help="Sekunden zwischen Klassifikationen (default: 2)")
+                        help="Seconds between classifications (default: 2)")
     args = parser.parse_args()
     main(args.interval)

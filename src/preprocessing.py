@@ -1,5 +1,5 @@
 """
-Preprocessing: Face Detection (dlib) und Gabor-Filter.
+Preprocessing: face detection (using dlib) and Gabor filter.
 """
 
 import cv2
@@ -13,7 +13,7 @@ _face_detector = dlib.get_frontal_face_detector()
 
 
 def detect_faces(img):
-    """Erkennt Gesichter in einem BGR-Bild. Gibt (faces, boxes) zurück."""
+    """Detects faces in a BGR image. Returns (faces, boxes)."""
     img_grayscale = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = _face_detector(img_grayscale)
     faces_preprocessed = []
@@ -38,7 +38,7 @@ def detect_faces(img):
 def apply_gabor_filter(image, ksize=GABOR_KSIZE, sigma=GABOR_SIGMA,
                        theta=GABOR_THETA, lambd=GABOR_LAMBDA,
                        gamma=GABOR_GAMMA, psi=GABOR_PSI):
-    """Wendet einen Gabor-Filter an und normalisiert das Ergebnis."""
+    """Applies a Gabor filter and normalizes the result."""
     gabor_kernel = cv2.getGaborKernel(
         ksize=(ksize, ksize), sigma=sigma, theta=theta,
         lambd=lambd, gamma=gamma, psi=psi, ktype=cv2.CV_32F

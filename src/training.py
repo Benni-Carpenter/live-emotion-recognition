@@ -1,5 +1,5 @@
 """
-Training und Validierung des Modells.
+Model training and validation.
 """
 
 import os

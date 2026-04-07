@@ -1,8 +1,10 @@
 """
-Zentrale Konfiguration für das Emotion Recognition Projekt.
+Central configuration for the emotion recognition project.
 """
 
 import torch
+import numpy as np
+
 
 
 def get_device():
@@ -19,8 +21,6 @@ NUM_CLASSES = len(CLASS_NAMES)
 MODEL_PATH = "models/trained_model_rafdb.pth"
 DATASET_DIR = "RafDB-Dataset"
 IMAGE_SIZE = 64
-
-import numpy as np
 
 # Gabor-Filter
 GABOR_KSIZE = 31

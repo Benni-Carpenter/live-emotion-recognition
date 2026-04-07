@@ -1,5 +1,5 @@
 """
-Modelldefinition: ResNet50 für Emotionsklassifikation.
+Model definition: ResNet-50 for emotion classification.
 """
 
 import torch.nn as nn

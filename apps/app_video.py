@@ -1,13 +1,13 @@
 """
-Video-Datei Emotionserkennung.
+Video file emotion recognition.
 
-Aufruf:
-    python app_video.py <video_pfad>
-    python app_video.py <video_pfad> -o <ausgabe_pfad>
+Usage:
+    python app_video.py <video_path>
+    python app_video.py <video_path> -o <output_path>
 
-Beispiele:
-    python app_video.py mein_video.mp4
-    python app_video.py mein_video.mp4 -o ergebnis.mp4
+Examples:
+    python app_video.py my_video.mp4
+    python app_video.py my_video.mp4 -o result.mp4
 """
 
 import cv2
@@ -62,8 +62,8 @@ def process_video(video_path, output_path="output_video.mp4"):
 
 if __name__ == "__main__":
     import argparse
-    parser = argparse.ArgumentParser(description="Emotionserkennung auf einer Video-Datei.")
-    parser.add_argument("video", help="Pfad zur Video-Datei")
-    parser.add_argument("-o", "--output", default="output_video.mp4", help="Pfad zur Ausgabedatei (default: output_video.mp4)")
+    parser = argparse.ArgumentParser(description="Emotion recognition on a video file.")
+    parser.add_argument("video", help="Path to the video file")
+    parser.add_argument("-o", "--output", default="output_video.mp4", help="Path to the output file (default: output_video.mp4)")
     args = parser.parse_args()
     process_video(args.video, args.output)

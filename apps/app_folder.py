@@ -1,13 +1,13 @@
 """
-Batch-Verarbeitung: Ordner mit Bildern → CSV mit Emotionsscores.
+Batch processing: image folder → CSV with emotion scores.
 
-Aufruf:
-    python app_folder.py <ordner_pfad>
-    python app_folder.py <ordner_pfad> -o <csv_pfad>
+Usage:
+    python app_folder.py <folder_path>
+    python app_folder.py <folder_path> -o <csv_path>
 
-Beispiele:
-    python app_folder.py ./bilder/
-    python app_folder.py ./bilder/ -o ergebnis.csv
+Examples:
+    python app_folder.py ./images/
+    python app_folder.py ./images/ -o results.csv
 """
 
 import os
@@ -60,9 +60,9 @@ def main(folder_path, csv_file='test.csv'):
 
 if __name__ == '__main__':
     import argparse
-    parser = argparse.ArgumentParser(description="Batch-Emotionserkennung auf einem Ordner mit Bildern.")
-    parser.add_argument("folder", help="Pfad zum Ordner mit Bildern")
-    parser.add_argument("-o", "--output", default="test.csv", help="Pfad zur CSV-Ausgabedatei (default: test.csv)")
+    parser = argparse.ArgumentParser(description="Batch emotion recognition on a folder of images.")
+    parser.add_argument("folder", help="Path to the folder containing images")
+    parser.add_argument("-o", "--output", default="test.csv", help="Path to the CSV output file (default: test.csv)")
     args = parser.parse_args()
 
     if not os.path.isdir(args.folder):
