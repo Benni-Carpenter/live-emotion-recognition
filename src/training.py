@@ -3,6 +3,7 @@ Training und Validierung des Modells.
 """
 
 import os
+import zipfile
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -12,6 +13,20 @@ import matplotlib.pyplot as plt
 from src.config import get_device, DATASET_DIR
 from src.dataset import LoadDataset
 from src.model import EmotionResNet
+
+
+def extract_dataset_if_needed(dataset_dir):
+    if os.path.isdir(dataset_dir):
+        return
+    zip_path = dataset_dir.rstrip('/\\') + '.zip'
+    if not os.path.isfile(zip_path):
+        raise FileNotFoundError(
+            f"Dataset not found: expected folder '{dataset_dir}' or zip '{zip_path}'."
+        )
+    print(f"Extracting {zip_path} ...")
+    with zipfile.ZipFile(zip_path, 'r') as zf:
+        zf.extractall(os.path.dirname(zip_path) or '.')
+    print("Extraction complete.")
 
 
 def train_epoch(model, device, train_loader, criterion, optimizer):
@@ -84,6 +99,7 @@ def plot_results(train_losses, val_losses, train_accuracies, val_accuracies):
 
 
 def run_training(device, dataset, batch_size=32, learning_rate=0.001, num_epochs=20):
+    extract_dataset_if_needed(dataset)
     train_dataset = LoadDataset(root=os.path.join(dataset, 'train'))
     val_dataset = LoadDataset(root=os.path.join(dataset, 'validation'))
 

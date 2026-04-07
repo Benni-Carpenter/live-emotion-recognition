@@ -1,22 +1,22 @@
-# cv-fer-project – Facial Emotion Recognition
+# CNN for Real-Time Facial Emotion Recognition
 
-CNN-basierte Emotionserkennung auf Basis von **ResNet-50**, trainiert auf dem **RAF-DB** Datensatz. Das Projekt unterstützt drei Anwendungsmodi: Live-Webcam, Video-Dateien und Batch-Verarbeitung ganzer Bildordner.
+CNN-based emotion recognition using **ResNet-50**, trained on the **RAF-DB** dataset. The project supports three application modes: live webcam, video files, and batch processing of image folders.
 
 ---
 
 ## Setup
 
-### Voraussetzungen
+### Prerequisites
 
 - Python 3.10+
-- Webcam (für `app_webcam.py`)
-- GPU optional, wird automatisch erkannt (CUDA / Apple MPS)
+- Webcam (for `app_webcam.py`)
+- GPU optional, auto-detected (CUDA / Apple MPS)
 
 ### Installation
 
 ```bash
-git clone https://github.com/<user>/cv-fer-project.git
-cd cv-fer-project
+git clone https://github.com/Benni-Carpenter/live-emotion-recognition.git
+cd live-emotion-recognition
 
 python -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
@@ -24,48 +24,65 @@ source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### Trainiertes Modell
+### Pretrained Model
 
-Das vortrainierte Modell (`trained_model_rafdb.pth`) ist zu groß für Git. Lade es separat herunter und lege es in `models/` ab – oder trainiere selbst:
+The pretrained model (`models/trained_model_rafdb.pth`, ~90 MB) is included directly in this repository. No separate download is needed — it will be available after cloning.
+
+> **Note:** Due to the large file size, cloning may take a moment longer than usual.
+
+If you want to retrain the model yourself, obtain the RAF-DB dataset and place the zip file at the project root as `RafDB-Dataset.zip`. The training script will automatically extract it on first run. The expected structure after extraction is:
+
+```
+RafDB-Dataset/
+├── train/
+│   ├── anger/
+│   ├── disgust/
+│   ├── fear/
+│   ├── happiness/
+│   ├── sadness/
+│   └── surprise/
+└── validation/
+    └── (same subfolders)
+```
+
+Then run:
 
 ```bash
 python -m src.training
 ```
 
-Der Datensatz wird im Ordner `RafDB-Dataset/` mit den Unterordnern `train/` und `validation/` erwartet, jeweils mit Klassen-Unterordnern (ImageFolder-Format).
+## Usage
 
-## Verwendung
+All apps are run from the project root:
 
-Alle Apps werden vom Projektroot aus gestartet:
-
-### Live-Webcam
+### Live Webcam
 
 ```bash
-python -m apps.app_webcam              # Standard: alle 2 Sekunden
-python -m apps.app_webcam -i 5         # Alle 5 Sekunden klassifizieren
+python -m apps.app_webcam              # Default: classify every 2 seconds
+python -m apps.app_webcam -i 5         # Classify every 5 seconds
 ```
 
-Beenden mit **Q**.
+Press **Q** to quit.
 
-### Video-Datei
+### Video File
 
 ```bash
-python -m apps.app_video mein_video.mp4
-python -m apps.app_video mein_video.mp4 -o ergebnis.mp4
+python -m apps.app_video my_video.mp4
+python -m apps.app_video my_video.mp4 -o output.mp4
 ```
 
-### Ordner mit Bildern → CSV
+### Image Folder → CSV
 
 ```bash
-python -m apps.app_folder ./bilder/
-python -m apps.app_folder ./bilder/ -o ergebnis.csv
+python -m apps.app_folder ./images/
+python -m apps.app_folder ./images/ -o results.csv
 ```
 
-Erzeugt eine CSV-Datei mit Softmax-Scores pro Emotion für jedes erkannte Gesicht.
+Produces a CSV file with softmax scores per emotion for each detected face.
 
-## Erkannte Emotionen
+## Recognized Emotions
 
-| Klasse     | Label |
+| Class      | Label |
 |------------|-------|
 | Anger      | 0     |
 | Disgust    | 1     |
@@ -74,23 +91,23 @@ Erzeugt eine CSV-Datei mit Softmax-Scores pro Emotion für jedes erkannte Gesich
 | Sadness    | 4     |
 | Surprise   | 5     |
 
-## Architektur
+## Architecture
 
-Das Modell basiert auf **ResNet-50** (ohne vortrainierte Weights), dessen letzter Fully-Connected-Layer auf 6 Klassen angepasst wird. Training erfolgt mit Adam-Optimizer, CrossEntropyLoss und Cosine-Annealing-Scheduler. Zur Face Detection wird **dlib** (HOG-basiert) verwendet.
+The model is based on **ResNet-50** (without pretrained ImageNet weights), with the final fully-connected layer replaced to output 6 classes. Training uses the Adam optimizer, CrossEntropyLoss, and a Cosine Annealing LR scheduler. Face detection is handled by **dlib** (HOG-based).
 
-## Training anpassen
+## Customizing Training
 
-Die wichtigsten Hyperparameter lassen sich in `src/training.py` beim Aufruf von `run_training()` ändern:
+The main hyperparameters can be adjusted in `src/training.py` when calling `run_training()`:
 
 ```python
 run_training(device, dataset, batch_size=32, learning_rate=0.001, num_epochs=20)
 ```
 
-Augmentationen (Flip, Crop, ColorJitter) sind in `src/dataset.py` definiert.
+Data augmentations (flip, crop, ColorJitter) are defined in `src/dataset.py`.
 
-## Abhängigkeiten
+## Dependencies
 
-Siehe `requirements.txt`. Die wichtigsten Pakete:
+See `requirements.txt`. Key packages:
 
 - `torch` / `torchvision`
 - `opencv-python`
