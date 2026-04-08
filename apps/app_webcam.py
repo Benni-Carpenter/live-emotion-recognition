@@ -9,27 +9,32 @@ Options:
     -i, --interval  Seconds between classifications (default: 2)
 """
 
-import cv2
-import time
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))  # noqa: E402
 
-from src.config import get_device, CLASS_NAMES, MODEL_PATH
-from src.preprocessing import detect_faces
-from src.inference import load_model, classify_faces
+import cv2  # noqa: E402
+import time  # noqa: E402
+
+from src.config import get_device, CLASS_NAMES, MODEL_PATH  # noqa: E402
+from src.preprocessing import detect_faces  # noqa: E402
+from src.inference import load_model, classify_faces  # noqa: E402
 
 
 def main(interval=2):
     device = get_device()
     model = load_model(MODEL_PATH, device)
+    start_time = time.time()
+    n_seconds = interval
+    cached_results = []
 
     cap = cv2.VideoCapture(0)
     if not cap.isOpened():
         print("Error: Could not open webcam")
         return
 
-    start_time = time.time()
-    n_seconds = interval
-
-    cached_results = []
+    cv2.namedWindow('Emotion Classifier', cv2.WINDOW_NORMAL)
+    cv2.resizeWindow('Emotion Classifier', 640, 480)
 
     font = cv2.FONT_HERSHEY_SIMPLEX
     font_scale = 0.7

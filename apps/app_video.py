@@ -10,12 +10,15 @@ Examples:
     python app_video.py my_video.mp4 -o result.mp4
 """
 
-import cv2
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))  # noqa: E402
 
-from src.config import get_device, CLASS_NAMES, MODEL_PATH
-from src.preprocessing import detect_faces
-from src.inference import load_model, classify_faces
+import cv2  # noqa: E402
 
+from src.config import get_device, CLASS_NAMES, MODEL_PATH  # noqa: E402
+from src.preprocessing import detect_faces  # noqa: E402
+from src.inference import load_model, classify_faces  # noqa: E402
 
 def process_video(video_path, output_path="output_video.mp4"):
     device = get_device()
