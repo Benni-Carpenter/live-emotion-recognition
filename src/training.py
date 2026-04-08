@@ -15,6 +15,7 @@ from src.dataset import LoadDataset
 from src.model import EmotionResNet
 
 
+# If the RAF_DB dataset is not yet unzipped, it will be by this function
 def extract_dataset_if_needed(dataset_dir):
     if os.path.isdir(dataset_dir):
         return

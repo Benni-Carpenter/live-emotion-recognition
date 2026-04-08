@@ -1,5 +1,5 @@
 """
-Preprocessing: face detection (using dlib) and Gabor filter.
+Preprocessing of the given faces, which are cutted out by dlib and passed on to the gabor filter.
 """
 
 import cv2

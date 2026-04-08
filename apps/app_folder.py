@@ -12,6 +12,8 @@ Examples:
 
 import sys
 import os
+import argparse
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))  # noqa: E402
 
 import cv2  # noqa: E402
@@ -21,10 +23,10 @@ from src.config import get_device, CLASS_NAMES, MODEL_PATH  # noqa: E402
 from src.preprocessing import detect_faces  # noqa: E402
 from src.inference import load_model, classify_with_scores  # noqa: E402
 
+
 def main(folder_path, csv_file='test.csv'):
     device = get_device()
     model = load_model(MODEL_PATH, device)
-
     valid_extensions = {'.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.webp'}
     csv_dictionary = []
 
@@ -60,8 +62,8 @@ def main(folder_path, csv_file='test.csv'):
     print(f"File saved as '{csv_file}'.")
 
 
+# Parse CLI arguments and run the batch processing on the given folder
 if __name__ == '__main__':
-    import argparse
     parser = argparse.ArgumentParser(description="Batch emotion recognition on a folder of images.")
     parser.add_argument("folder", help="Path to the folder containing images")
     parser.add_argument("-o", "--output", default="test.csv", help="Path to the CSV output file (default: test.csv)")

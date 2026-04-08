@@ -1,5 +1,5 @@
 """
-Inference: load model and classify faces.
+Functions to load the model and classify faces.
 """
 
 import torch
@@ -9,6 +9,8 @@ import torchvision.transforms as transforms
 from src.config import IMAGE_SIZE, CLASS_NAMES, MODEL_PATH, get_device
 
 
+# Preprocessing pipeline applied to each detected face before inference:
+# resize to model input size, convert to tensor, and normalize to [-1, 1]
 _transform = transforms.Compose([
     transforms.Resize((IMAGE_SIZE, IMAGE_SIZE)),
     transforms.ToTensor(),

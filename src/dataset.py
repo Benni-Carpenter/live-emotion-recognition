@@ -1,5 +1,5 @@
 """
-Dataset classes for training and validation.
+Function to load dataset classes for training and imference.
 """
 
 from torch.utils.data import Dataset

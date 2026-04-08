@@ -12,13 +12,15 @@ Examples:
 
 import sys
 import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))  # noqa: E402
+import argparse
 
-import cv2  # noqa: E402
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from src.config import get_device, CLASS_NAMES, MODEL_PATH  # noqa: E402
-from src.preprocessing import detect_faces  # noqa: E402
-from src.inference import load_model, classify_faces  # noqa: E402
+import cv2
+
+from src.config import get_device, CLASS_NAMES, MODEL_PATH 
+from src.preprocessing import detect_faces 
+from src.inference import load_model, classify_faces
 
 def process_video(video_path, output_path="output_video.mp4"):
     device = get_device()
@@ -63,8 +65,8 @@ def process_video(video_path, output_path="output_video.mp4"):
     print("Processing complete. Output saved to:", output_path)
 
 
+# Parse CLI arguments and run emotion recognition on the given video file
 if __name__ == "__main__":
-    import argparse
     parser = argparse.ArgumentParser(description="Emotion recognition on a video file.")
     parser.add_argument("video", help="Path to the video file")
     parser.add_argument("-o", "--output", default="output_video.mp4", help="Path to the output file (default: output_video.mp4)")

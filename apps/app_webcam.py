@@ -11,14 +11,16 @@ Options:
 
 import sys
 import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))  # noqa: E402
+import time
+import argparse
 
-import cv2  # noqa: E402
-import time  # noqa: E402
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from src.config import get_device, CLASS_NAMES, MODEL_PATH  # noqa: E402
-from src.preprocessing import detect_faces  # noqa: E402
-from src.inference import load_model, classify_faces  # noqa: E402
+import cv2
+
+from src.config import get_device, CLASS_NAMES, MODEL_PATH
+from src.preprocessing import detect_faces
+from src.inference import load_model, classify_faces
 
 
 def main(interval=2):
@@ -71,8 +73,8 @@ def main(interval=2):
     cv2.destroyAllWindows()
 
 
+# Parse CLI arguments and start the live webcam emotion recognition
 if __name__ == "__main__":
-    import argparse
     parser = argparse.ArgumentParser(description="Live webcam emotion recognition.")
     parser.add_argument("-i", "--interval", type=float, default=2,
                         help="Seconds between classifications (default: 2)")
